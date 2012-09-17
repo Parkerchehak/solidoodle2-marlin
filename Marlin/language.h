@@ -22,8 +22,8 @@
 	#define MACHINE_NAME "Ultimaker"
 	#define FIRMWARE_URL "http://firmware.ultimaker.com"
 #else
-	#define MACHINE_NAME "Mendel"
-	#define FIRMWARE_URL "http://www.mendel-parts.com"
+	#define MACHINE_NAME "Solidoodle"
+	#define FIRMWARE_URL "https://github.com/mlaws/solidoodle2-marlin"
 #endif
 
 #define STRINGIFY_(n) #n
