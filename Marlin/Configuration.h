@@ -192,11 +192,11 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 #define min_software_endstops false //If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops false  //If true, axis won't move to coordinates greater than the defined lengths below.
 // Travel limits after homing
-#define X_MAX_POS 205
+#define X_MAX_POS 159
 #define X_MIN_POS 0
-#define Y_MAX_POS 205
+#define Y_MAX_POS 150
 #define Y_MIN_POS 0
-#define Z_MAX_POS 200
+#define Z_MAX_POS 150
 #define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
@@ -204,7 +204,7 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 #define Z_MAX_LENGTH (Z_MAX_POS - Z_MIN_POS)
 
 // The position of the homing switches
-#define MANUAL_HOME_POSITIONS  // If defined, manualy programed locations will be used
+//#define MANUAL_HOME_POSITIONS  // If defined, manualy programed locations will be used
 //#define BED_CENTER_AT_0_0  // If defined the center of the bed is defined as (0,0)
 
 //Manual homing switch locations:
