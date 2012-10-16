@@ -39,6 +39,7 @@
 #include "EEPROMwrite.h"
 #include "language.h"
 #include "pins_arduino.h"
+#include "Hysteresis.h"
 
 #define VERSION_STRING  "1.0.0"
 
@@ -1197,6 +1198,19 @@ void process_commands()
           }
       }
       break;
+   case 98: // M98
+    {
+      hysteresis.ReportToSerial();
+    }
+    break;
+   case 99: // M99
+    {
+      if(code_seen('X')) hysteresis.SetAxis( X_AXIS, code_value() );
+      if(code_seen('Y')) hysteresis.SetAxis( Y_AXIS, code_value() );
+      if(code_seen('Z')) hysteresis.SetAxis( Z_AXIS, code_value() );
+      if(code_seen('E')) hysteresis.SetAxis( E_AXIS, code_value() );
+    }
+    break;
     case 115: // M115
       SerialprintPGM(MSG_M115_REPORT);
       break;
