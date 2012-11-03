@@ -1,4 +1,4 @@
-Marlin firmware for Solidoodle 2
+#Marlin firmware for Solidoodle 2
 
 Previous official Solidoodle firmware was based on early version of Marlin and could not be altered to accomodate a Panelolu LCD screen and encoder without many errors. This version has configuration.h and configuration_adv.h altered to reflect all changes found in official Solidoodle firmware.
 
@@ -30,11 +30,11 @@ Start the Arduino IDE and you should now see 'Sanguino W/ ATmega644P' AND 'Sangu
 
 For a Panelolu/SD card reader combo, uncomment line 302 in configuration.h from:
 
-'''C++
+'''C
 //#define ULTIPANEL
 '''
 to:
-'''C++
+'''C
 #define ULTIPANEL
 '''
 Now compile and upload.
@@ -46,11 +46,11 @@ Now compile and upload.
 
 
 If you're only adding SDSL, uncomment line 290 in configuration.h from:
-'''C++
+'''C
 //#define SDSUPPORT // Enable SD Card Support in Hardware Console
 '''
 to:
-'''C++
+'''C
 #define SDSUPPORT // Enable SD Card Support in Hardware Console
 '''
 Now compile and upload.
