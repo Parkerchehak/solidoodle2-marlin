@@ -30,13 +30,13 @@ Start the Arduino IDE and you should now see 'Sanguino W/ ATmega644P' AND 'Sangu
 
 For a Panelolu/SD card reader combo, uncomment line 302 in configuration.h from:
 
-'''C
+```C
 //#define ULTIPANEL
-'''
+```
 to:
-'''C
+```C
 #define ULTIPANEL
-'''
+```
 Now compile and upload.
 
 -http://www.soliforum.com/topic/127/panelolu-complete-guide/
@@ -46,13 +46,13 @@ Now compile and upload.
 
 
 If you're only adding SDSL, uncomment line 290 in configuration.h from:
-'''C
+```C
 //#define SDSUPPORT // Enable SD Card Support in Hardware Console
-'''
+```
 to:
-'''C
+```C
 #define SDSUPPORT // Enable SD Card Support in Hardware Console
-'''
+```
 Now compile and upload.
 
 -http://reprap.org/wiki/SDSL
