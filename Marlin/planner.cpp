@@ -136,6 +136,23 @@ static int8_t prev_block_index(int8_t block_index) {
 //=============================functions         ============================
 //===========================================================================
 
+void copy_position( float* ret_position )
+{
+  for(int i=0;i<NUM_AXIS;++i)
+  {
+    ret_position[i] = position[i];
+  }
+}
+
+void set_position( const float* new_position )
+{
+  for(int i=0;i<NUM_AXIS;++i)
+  {
+    position[i] = new_position[i];
+  }
+}
+
+
 // Calculates the distance (not time) it takes to accelerate from initial_rate to target_rate using the 
 // given acceleration:
 FORCE_INLINE float estimate_acceleration_distance(float initial_rate, float target_rate, float acceleration)
