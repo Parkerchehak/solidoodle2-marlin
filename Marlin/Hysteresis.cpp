@@ -29,6 +29,7 @@
 //===========================================================================
 
 Hysteresis hysteresis( DEFAULT_HYSTERESIS_MM );
+float axis_shift[ NUM_AXIS ] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 //===========================================================================
 Hysteresis::Hysteresis( float x_mm, float y_mm, float z_mm, float e_mm )
@@ -75,6 +76,14 @@ void Hysteresis::ReportToSerial()
   SERIAL_PROTOCOL(m_hysteresis_mm[Z_AXIS]);
   SERIAL_PROTOCOLPGM(" E");      
   SERIAL_PROTOCOL(m_hysteresis_mm[E_AXIS]);
+  SERIAL_PROTOCOLPGM(" SHIFTS:x=");      
+  SERIAL_PROTOCOL(axis_shift[X_AXIS]);
+  SERIAL_PROTOCOLPGM(" y=");      
+  SERIAL_PROTOCOL(axis_shift[Y_AXIS]);
+  SERIAL_PROTOCOLPGM(" z=");      
+  SERIAL_PROTOCOL(axis_shift[Z_AXIS]);
+  SERIAL_PROTOCOLPGM(" e=");      
+  SERIAL_PROTOCOL(axis_shift[E_AXIS]);
   
   SERIAL_PROTOCOLLN("");
 }
@@ -131,8 +140,10 @@ void Hysteresis::InsertCorrection(const float &x, const float &y, const float &z
       // if this axis changed direction...
       if( direction_change_bits & (1<<axis) )
       {
+        float fix = (((direction_bits&(1<<axis))!=0)?-m_hysteresis_mm[axis]:m_hysteresis_mm[axis]);
         //... add the hysteresis
-        fixed_pos[axis] += (((direction_bits&(1<<axis))!=0)?-m_hysteresis_mm[axis]:m_hysteresis_mm[axis]);
+        fixed_pos[axis] += fix;
+        axis_shift[axis] += fix;
       }
     }
     float best_feedrate = calc_best_feedrate( current_position, destination );
@@ -168,7 +179,7 @@ void Hysteresis::InsertCorrection(const float &x, const float &y, const float &z
   
     float position_before_correction[NUM_AXIS];
     copy_position( position_before_correction );
-    m_prev_direction_bits = direction_bits; // need to set these now to avoid recursion as plan_buffer_line calls this function
+    m_prev_direction_bits = calc_direction_bits( current_position, fixed_pos ); // need to set these now to avoid recursion as plan_buffer_line calls this function
     plan_buffer_line(fixed_pos[X_AXIS], fixed_pos[Y_AXIS], fixed_pos[Z_AXIS], fixed_pos[E_AXIS], best_feedrate, active_extruder);
     set_position( position_before_correction );
   }
